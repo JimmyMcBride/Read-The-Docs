@@ -1,0 +1,34 @@
+site_name: Read The Docs
+nav:
+  - Home: index.md
+  - Kotlin:
+    - Kotlin Coroutines: kotlin/coroutines.md
+theme:
+  name: material
+  highlightjs: true
+  hljs_languages:
+    - kotlin
+    - groovy
+  features:
+    - navigation.tabs
+  palette:
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+markdown_extensions:
+  - pymdownx.highlight:
+      use_pygments: true
+      auto_title: true
+      linenums: false
+      anchor_linenums: false
+  - pymdownx.superfences
