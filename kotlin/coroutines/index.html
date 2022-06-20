@@ -1,0 +1,841 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.6">
+    
+    
+      
+        <title>Kotlin Coroutines - Read The Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4a0965b7.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kotlin-coroutines-101" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Read The Docs" class="md-header__button md-logo" aria-label="Read The Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Read The Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kotlin Coroutines
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
+        Kotlin
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Read The Docs" class="md-nav__button md-logo" aria-label="Read The Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Read The Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Kotlin
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Kotlin" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Kotlin
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Kotlin Coroutines
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Kotlin Coroutines
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#coroutine-scopes" class="md-nav__link">
+    Coroutine Scopes
+  </a>
+  
+    <nav class="md-nav" aria-label="Coroutine Scopes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#global-scope" class="md-nav__link">
+    Global Scope
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lifecycle-scope" class="md-nav__link">
+    Lifecycle Scope
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewmodel-scope" class="md-nav__link">
+    ViewModel Scope
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-examples" class="md-nav__link">
+    Practical Examples
+  </a>
+  
+    <nav class="md-nav" aria-label="Practical Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-multiple-coroutines-and-suspended-functions" class="md-nav__link">
+    Running Multiple Coroutines and Suspended Functions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dispatchers" class="md-nav__link">
+    Dispatchers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recapping" class="md-nav__link">
+    Recapping
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#coroutine-scopes" class="md-nav__link">
+    Coroutine Scopes
+  </a>
+  
+    <nav class="md-nav" aria-label="Coroutine Scopes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#global-scope" class="md-nav__link">
+    Global Scope
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lifecycle-scope" class="md-nav__link">
+    Lifecycle Scope
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewmodel-scope" class="md-nav__link">
+    ViewModel Scope
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-examples" class="md-nav__link">
+    Practical Examples
+  </a>
+  
+    <nav class="md-nav" aria-label="Practical Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-multiple-coroutines-and-suspended-functions" class="md-nav__link">
+    Running Multiple Coroutines and Suspended Functions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dispatchers" class="md-nav__link">
+    Dispatchers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recapping" class="md-nav__link">
+    Recapping
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="kotlin-coroutines-101">Kotlin Coroutines 101</h1>
+<p>What is a coroutine? To put it simply, a coroutine is a way creating a suspendable code that can run
+concurrently with code running on other threads. But what does that mean? Let's take a deeper look
+and see what coroutines have to offer us, what they are not, and where/when we would want to use
+them in the scope of an android project. First, let's define a couple things so that we're all on
+the same page.</p>
+<blockquote>
+<p><strong>Thread</strong> - A thread is a [sequential line of execution] in a program. The Java Virtual Machine
+allows an application to have multiple threads of execution running concurrently.
+<a href="https://developer.android.com/reference/java/lang/Thread">Source</a></p>
+<p><strong>Concurrency</strong> - The coordination and management of independent lines of execution. These
+executions can be truly parallel or simply be managed by interleaving. They can communicate via
+shared memory or message passing.
+<a href="https://cs.lmu.edu/~ray/notes/introconcurrency/">Source</a></p>
+<p><strong>Multithreading</strong> - Execution of a program with multiple threads.
+<a href="https://cs.lmu.edu/~ray/notes/introconcurrency/">Source</a></p>
+<p><strong>Main-safe</strong> - We consider a function main-safe when it doesn't block UI updates on the main thread.
+<a href="https://developer.android.com/kotlin/coroutines#use-coroutines-for-main-safety">Source</a></p>
+<p><strong>Suspend Function</strong> - A function that could be started, paused, and resume.
+<a href="https://www.geeksforgeeks.org/suspend-function-in-kotlin-coroutines/">Source</a></p>
+</blockquote>
+<h2 id="coroutine-scopes">Coroutine Scopes</h2>
+<p>In the context of Android, we have 3 possible scopes for coroutines, each with their own specific
+behavior. That is global, lifecycle and viewmodel.</p>
+<h3 id="global-scope">Global Scope</h3>
+<p>A coroutine launched in the global scope will live as long as the application. That makes it the
+least desirable scope in which to launch most coroutines. Launching a coroutine in the global
+routine, you can expect the following behavior:</p>
+<ul>
+<li>If a coroutine finishes before the application is shut down, the coroutine will be destroyed and
+  not live for the remainder of the applications life. (This is good.)</li>
+<li>A coroutine launched in the global scope will continue to run through all lifecycle and activity
+  changes. This means activity/fragment lifecycle changes will not cancel the coroutine. This isn't
+  always desirable behavior for our app. Example: A coroutine that adds 1 to a counter every second
+  will continue to count as the user rotates the screen and navigates through activities and
+  fragments.</li>
+</ul>
+<p>While there may be use cases for using global scope, this shouldn't be your default choice and
+should only be used when necessary. You can gain access to using the global scope coroutine context
+with the following dependency in your modules build gradle:</p>
+<div class="highlight"><span class="filename">Groovy</span><pre><span></span><code><span class="n">implementation</span><span class="w"> </span><span class="s1">&#39;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2&#39;</span><span class="w"></span>
+</code></pre></div>
+<h3 id="lifecycle-scope">Lifecycle Scope</h3>
+<p>A coroutine in the lifecycle scope, is bound to the lifecycle of the activity. So say we have a
+coroutine function that adds 1 to a counter every second. This counter will be reset if the user
+rotates the screen and onDestroy gets called. This coroutine will also be canceled when navigate to
+a new activity.</p>
+<p>We can gain access to the lifecycle scope in our projects by adding the following dependency:</p>
+<div class="highlight"><span class="filename">Groovy</span><pre><span></span><code><span class="n">implementation</span><span class="w"> </span><span class="s1">&#39;androidx.activity:activity-ktx:1.4.0&#39;</span><span class="w"></span>
+</code></pre></div>
+<h3 id="viewmodel-scope">ViewModel Scope</h3>
+<p>When we use fragments, compose and in single activity apps having our coroutines last for the entire
+life of the activity becomes undesirable, for the same reason global scope is undesirable. In that
+case we can use the viewmodel scope. The viewmodel scope is effective because now our coroutines
+will only last as long as our viewmodel is alive. This means we can set up viewmodel's for each
+fragment or composable function that we want to limit our coroutines too. So if our composable
+functions and fragments that our viewmodel's are attached to die, so will our coroutines.</p>
+<p>If we want to use viewmodel scoped coroutines in our project, we can add the following dependency:</p>
+<div class="highlight"><span class="filename">Groovy</span><pre><span></span><code><span class="n">implementation</span><span class="w"> </span><span class="s1">&#39;androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0&#39;</span><span class="w"></span>
+</code></pre></div>
+<h2 id="practical-examples">Practical Examples</h2>
+<p>So now that we understand a little more about what's involved with coroutines and the various scopes
+in which we can run them in, let's play around with them a little so we can get a practical
+understanding of the can work in our application. For this post, I'm going to use lifecycleScope in
+the main activity of a new project, since we won't be using any viewmodel's today.</p>
+<p>Let's start with a simple example:</p>
+<div class="highlight"><span class="filename">Kotlin</span><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">MainActivity</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">AppCompatActivity</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span><span class="w"> </span><span class="n">Bundle?)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">super</span><span class="p">.</span><span class="na">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">setContentView</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">activity_main</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Pre lifecycleScope - onCreate, running on thread: </span><span class="si">${</span><span class="w"></span>
+<span class="w">                </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">name</span><span class="w"></span>
+<span class="w">            </span><span class="si">}</span><span class="s">&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">lifecycleScope</span><span class="p">.</span><span class="na">launch</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;LifecycleScope, running on thread: </span><span class="si">${</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">name</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Post lifecycleScope - onCreate running on thread: </span><span class="si">${</span><span class="w"></span>
+<span class="w">                </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">name</span><span class="w"></span>
+<span class="w">            </span><span class="si">}</span><span class="s">&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">TAG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;KotlinCoroutines&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>If we run our app, we'll see that our logs print out</p>
+<div class="highlight"><span class="filename">Text Only</span><pre><span></span><code>Pre lifecycleScope - onCreate, running on thread: main
+LifecycleScope, running on thread: main
+Post lifecycleScope - onCreate running on thread: main
+</code></pre></div>
+<p>This is to be expected. Our code has run synchronously. But coroutines shine in areas where code
+takes some time to run. We can easily make our lifecycleScope.launch take more time by simply adding
+a delay, which is a suspended function and can only be called from a coroutine context or another
+suspended function. So now our lifecycleScope.launch should look something like this:</p>
+<div class="highlight"><span class="filename">Kotlin</span><pre><span></span><code><span class="n">lifecycleScope</span><span class="p">.</span><span class="na">launch</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">delay</span><span class="p">(</span><span class="m">3000L</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;LifecycleScope, running on thread: </span><span class="si">${</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">name</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>Now when we run our logs we will see:</p>
+<div class="highlight"><span class="filename">Text Only</span><pre><span></span><code>Pre lifecycleScope - onCreate, running on thread: main
+Post lifecycleScope - onCreate running on thread: main
+</code></pre></div>
+<p>And three seconds later we will see <code>LifecycleScope, running on thread: main</code>
+pop up in our logs.</p>
+<p>What this means is that even through our lifecycle scope is running on the main thread, it did not
+block the main thread at all. So our code here can be considered main-safe. To further illustrate
+main-safety let's update the UI after the lifecycle scope block and see if the UI does indeed update
+before our delayed lifecycle scope is done running. (I have given the default textview in my
+activity_main.xml file an id of <code>tv_dummy</code>.)</p>
+<div class="highlight"><span class="filename">Kotlin</span><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">dummyTextView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findViewById</span><span class="o">&lt;</span><span class="n">TextView</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">tv_dummy</span><span class="p">)</span><span class="w"></span>
+<span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Pre lifecycleScope - onCreate, running on thread: </span><span class="si">${</span><span class="w"></span>
+<span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">()</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="na">name</span><span class="w"></span>
+<span class="w">    </span><span class="si">}</span><span class="s">&quot;</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+<span class="n">lifecycleScope</span><span class="p">.</span><span class="na">launch</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">delay</span><span class="p">(</span><span class="m">3000L</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;LifecycleScope, running on thread: </span><span class="si">${</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">name</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="n">dummyTextView</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello, from after lifecycle scope!&quot;</span><span class="w"></span>
+</code></pre></div>
+<p>When we run this code, we will see that our UI immediately has the new text displayed in the
+textview, so our code is main-safe. But what if we want to make this code not main-safe? We can use
+something called run blocking. Run blocking gives us a coroutine scope that blocks the main thread
+until the code has been completed. So if we change our lifecycleScope.launch to a runBlocking scope:</p>
+<div class="highlight"><span class="filename">Kotlin</span><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">dummyTextView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findViewById</span><span class="o">&lt;</span><span class="n">TextView</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">tv_dummy</span><span class="p">)</span><span class="w"></span>
+<span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Pre lifecycleScope - onCreate, running on thread: </span><span class="si">${</span><span class="w"></span>
+<span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">()</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="na">name</span><span class="w"></span>
+<span class="w">    </span><span class="si">}</span><span class="s">&quot;</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+<span class="n">runBlocking</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">delay</span><span class="p">(</span><span class="m">3000L</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;LifecycleScope, running on thread: </span><span class="si">${</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">name</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="n">dummyTextView</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello, from after lifecycle scope!&quot;</span><span class="w"></span>
+</code></pre></div>
+<p>We will observe that the UI is blank for 3 seconds before displaying the UI. That is because our
+runBlocking scope has stopped the UI from updating for 3 seconds until it lets our onCreate
+lifecycle finish. Our code is no longer main safe.</p>
+<h3 id="running-multiple-coroutines-and-suspended-functions">Running Multiple Coroutines and Suspended Functions</h3>
+<p>To explore a little further, let's see what happens when we try to launch more than one suspended
+function and coroutine at once. Let's start with just a suspended function first.</p>
+<div class="highlight"><span class="filename">Kotlin</span><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">greet</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">delay</span><span class="p">(</span><span class="m">3000L</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Greetings from thread: </span><span class="si">${</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">name</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>Now we call this function from inside our lifecycle scope twice and see what happens.</p>
+<div class="highlight"><span class="filename">Kotlin</span><pre><span></span><code><span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Pre lifecycleScope - onCreate, running on thread: </span><span class="si">${</span><span class="w"></span>
+<span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">()</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="na">name</span><span class="w"></span>
+<span class="w">    </span><span class="si">}</span><span class="s">&quot;</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+<span class="n">lifecycleScope</span><span class="p">.</span><span class="na">launch</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">greet</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="n">greet</span><span class="p">()</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Post lifecycleScope - onCreate running on thread: </span><span class="si">${</span><span class="w"></span>
+<span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">()</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="na">name</span><span class="w"></span>
+<span class="w">    </span><span class="si">}</span><span class="s">&quot;</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p>Running this code logs <code>Pre lifecycleScope - onCreate, running on thread: main</code>
+and <code>Post lifecycleScope - onCreate running on thread: main</code> immediately when the application gets
+launched. Then, after 3 seconds <code>Greetings from thread: main</code> gets ran, followed by
+<code>Greetings from thread: main</code> again after another subsequent 3 seconds. This seems to make sense.
+Lifecycle scope is running both functions is sequence, each taking 3 seconds, making the full
+lifecycle scope launch take a total of 6 seconds to complete. But what happens if we add a lifecycle
+scope for the main thread inside the suspended function? Something like this:</p>
+<div class="highlight"><span class="filename">Kotlin</span><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">greet</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">lifecycleScope</span><span class="p">.</span><span class="na">launch</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">delay</span><span class="p">(</span><span class="m">3000L</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Greetings from thread: </span><span class="si">${</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">name</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>If we do this and run our code we will see our pre and post lifecycleScope logs logging right away
+when we start the app. However, 3 seconds later both greet functions will print at the same time,
+from the main thread. This is because even though they are running on the same main thread, the
+functions are able to be suspended an ran concurrently alongside each other since they have they are
+launched in their own lifecycle scope. This is pretty nifty. So, for example if we had 5 network
+requests that we wanted to run at the same time, we could launch them each in their own lifecycle
+scope to have them all fire off at approximately the same time without slowing anything down. Even
+so, we still don't want to clog up our main thread with a huge amount of long running and heavy
+computational tasks, because that could still slow down and clog up the main thread. Which leads us
+to our next topic, dispatchers.</p>
+<h2 id="dispatchers">Dispatchers</h2>
+<p>To divide up the workload, we can pass the context of the thread we want our code to run on with the
+use of dispatchers. There are 4 types of dispatchers that we can pass as context for our coroutine
+launch scopes.</p>
+<ul>
+<li>Main: Used for UI operations and quick work such as calling suspend functions.</li>
+<li>IO: Great for running network, database or disc operations. Think Input/Output.</li>
+<li>Default: Best used for CPU-intensive work, like sorting or parsing giant lists of data.</li>
+<li>Unconfined: This dispatcher isn't confined to any thread. Instead it executes the coroutine in the
+  current scopes context and let's the coroutine resume in whatever thread that is used by it's
+  suspended function and does not dictate which thread it needs to run on.</li>
+</ul>
+<p>When creating our coroutine scope launch, we can specify which thread we want it to launch, as well
+as using <code>withContext</code> to switch contexts of the thread your running code on in a current coroutine
+scope. Let's check out some examples below to see how this works.</p>
+<div class="highlight"><span class="filename">Kotlin</span><pre><span></span><code><span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Pre lifecycleScope - onCreate, running on thread: </span><span class="si">${</span><span class="w"></span>
+<span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">()</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="na">name</span><span class="w"></span>
+<span class="w">    </span><span class="si">}</span><span class="s">&quot;</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+<span class="n">lifecycleScope</span><span class="p">.</span><span class="na">launch</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="na">Main</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;LifecycleScope, context MAIN - running on thread: </span><span class="si">${</span><span class="w"></span>
+<span class="w">            </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">()</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="na">name</span><span class="w"></span>
+<span class="w">        </span><span class="si">}</span><span class="s">&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">withContext</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="na">IO</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;LifecycleScope, context IO - running on thread: </span><span class="si">${</span><span class="w"></span>
+<span class="w">                </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">()</span><span class="w"></span>
+<span class="w">                    </span><span class="p">.</span><span class="na">name</span><span class="w"></span>
+<span class="w">            </span><span class="si">}</span><span class="s">&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Post lifecycleScope - onCreate running on thread: </span><span class="si">${</span><span class="w"></span>
+<span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">()</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="na">name</span><span class="w"></span>
+<span class="w">    </span><span class="si">}</span><span class="s">&quot;</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p>Will result in the following logs:</p>
+<div class="highlight"><span class="filename">Text Only</span><pre><span></span><code>Pre lifecycleScope - onCreate, running on thread: main
+Post lifecycleScope - onCreate running on thread: main
+LifecycleScope, context MAIN - running on thread: main
+LifecycleScope, context IO - running on thread: DefaultDispatcher-worker-2
+</code></pre></div>
+<p>So we can see here that we choose <code>Dispatchers.Main</code> in our lifecycle scope, everything is the same,
+but once we switch the context to IO we can see our code running on a separate thread.</p>
+<h2 id="recapping">Recapping</h2>
+<p>So today we've learned about:</p>
+<ul>
+<li>Key definitions to understand coroutines.</li>
+<li>Different coroutine scopes in Android.</li>
+<li>Practical examples about the behavior of coroutines.</li>
+<li>Coroutine dispatchers and running code on different threads.</li>
+</ul>
+<p>There is obviously a lot more to learn about coroutines, from jobs to async await and edge case
+behavior, but we can learn more about that in a later post. What areas of coroutines would you like
+to explore together next? Leave a comment below with your thoughts, constructive feedback, or any
+corrections to explanations/examples. Thanks for reading, happy coding!</p>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../.." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Home
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.85cb4492.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a877e258.min.js"></script>
+      
+    
+  </body>
+</html>
